@@ -1,0 +1,27 @@
+# Build output
+/bin/
+/dist/
+/web/dist/app/
+*.test
+*.out
+coverage.*
+
+# Dependencies
+node_modules/
+
+# Test artifacts
+/web/test-results/
+/web/playwright-report/
+/web/blob-report/
+
+# Editors and OS
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local environment
+.env
+.env.*
