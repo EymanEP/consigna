@@ -114,3 +114,16 @@
 :global([data-fx='calm']) .glyph {
   animation: none;
 }
+
+/* Phones held sideways: keep the drop target from filling the whole screen. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: 150px;
+    gap: 8px;
+    padding: 16px;
+  }
+
+  .hero .body {
+    display: none;
+  }
+}
