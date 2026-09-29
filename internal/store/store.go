@@ -126,6 +126,7 @@ type Store struct {
 	files     map[string]*fileEntry
 	uploads   map[string]*uploadEntry
 	completed map[string]completedUpload
+	readers   map[*Reader]struct{}
 	used      int64
 	reserved  int64
 	closed    bool
@@ -166,6 +167,7 @@ func New(opts Options) (*Store, error) {
 		files:     map[string]*fileEntry{},
 		uploads:   map[string]*uploadEntry{},
 		completed: map[string]completedUpload{},
+		readers:   map[*Reader]struct{}{},
 	}
 	for _, d := range []string{s.blobDir, s.uploadDir} {
 		if err := os.MkdirAll(d, 0o700); err != nil {
@@ -228,7 +230,9 @@ func (s *Store) CreateUpload(owner Owner, name string, size int64) (Upload, *Fil
 		s.mu.Unlock()
 		return Upload{}, nil, ErrClosed
 	}
-	if s.used+s.reserved+size > s.opts.Limits.TrayLimit() {
+	// Compare without adding: a huge Upload-Length must not overflow the
+	// sum and slip past the limit.
+	if limit := s.opts.Limits.TrayLimit(); size > limit || size > limit-s.used-s.reserved {
 		s.mu.Unlock()
 		return Upload{}, nil, ErrQuotaExceeded
 	}
@@ -423,6 +427,7 @@ func (r *Reader) Close() error {
 	r.once.Do(func() {
 		err = r.File.Close()
 		r.store.mu.Lock()
+		delete(r.store.readers, r)
 		r.entry.refs--
 		gone := r.entry.removed && r.entry.refs == 0
 		r.store.mu.Unlock()
@@ -448,7 +453,9 @@ func (s *Store) Open(id string) (*Reader, File, error) {
 	e.refs++
 	file := e.File
 	file.ExpiresAt = file.AddedAt.Add(s.opts.Limits.FileTTL())
-	return &Reader{File: f, store: s, entry: e}, file, nil
+	r := &Reader{File: f, store: s, entry: e}
+	s.readers[r] = struct{}{}
+	return r, file, nil
 }
 
 // Get returns a file's metadata.
@@ -559,8 +566,10 @@ func (s *Store) Run(ctx context.Context, every time.Duration) {
 	}
 }
 
-// Close interrupts running uploads and makes further calls fail. It does not
-// delete the directory; the owner of the directory does that.
+// Close interrupts running uploads, closes files still open for downloads
+// and makes further calls fail, so the directory can be deleted even where
+// open files cannot be (Windows). It does not delete the directory; the owner
+// of the directory does that.
 func (s *Store) Close() {
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -569,6 +578,11 @@ func (s *Store) Close() {
 		if u.writer != nil && u.writer.interrupt != nil {
 			u.writer.interrupt()
 		}
+	}
+	for r := range s.readers {
+		// The download handler's later Close sees an already closed file
+		// and only does its bookkeeping.
+		_ = r.File.Close()
 	}
 }
 

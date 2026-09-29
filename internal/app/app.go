@@ -70,7 +70,12 @@ func Run(ctx context.Context, cfg Config) error {
 	if err != nil {
 		return err
 	}
-	defer dir.remove()
+	removed := false
+	defer func() {
+		if !removed {
+			_ = dir.remove()
+		}
+	}()
 
 	hub := &events.Hub{}
 	st, err := store.New(store.Options{
@@ -177,7 +182,13 @@ func Run(ctx context.Context, cfg Config) error {
 	}
 	stopBackground()
 	wg.Wait()
-	fmt.Fprintln(cfg.Out, "\n  Consigna stopped. Every file in the tray was deleted.")
+	removed = true
+	if rmErr := dir.remove(); rmErr != nil {
+		fmt.Fprintf(cfg.Out, "\n  Consigna stopped, but some files could not be deleted from %s.\n"+
+			"  They will be removed the next time Consigna starts.\n", dir.path)
+	} else {
+		fmt.Fprintln(cfg.Out, "\n  Consigna stopped. Every file in the tray was deleted.")
+	}
 	return err
 }
 

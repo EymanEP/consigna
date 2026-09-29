@@ -38,6 +38,11 @@ const codeAlphabet = "23456789ABCDEFGHJKMNPQRSTWXYZ"
 // MaxNameRunes bounds device names.
 const MaxNameRunes = 32
 
+// maxHostDevices bounds the devices admitted without a code (the host's own
+// browsers). Beyond it, the least recently seen offline one is replaced, so
+// stray requests can never crowd out the slots real devices join into.
+const maxHostDevices = 8
+
 // Device is a browser that joined the session.
 type Device struct {
 	ID        string
@@ -147,12 +152,35 @@ func (m *Manager) Join(code, ip, userAgent string) (string, Device, error) {
 func (m *Manager) JoinTrusted(ip, userAgent string, isHost bool) (string, Device, error) {
 	now := m.opts.Now()
 	m.mu.Lock()
+	if isHost {
+		m.evictStaleHostLocked()
+	}
 	token, d, err := m.addLocked(ip, userAgent, isHost, now)
 	m.mu.Unlock()
 	if err == nil {
 		m.opts.OnChange()
 	}
 	return token, d, err
+}
+
+// evictStaleHostLocked makes room for a new host device when the host limit
+// is reached, by dropping the offline host device seen longest ago.
+func (m *Manager) evictStaleHostLocked() {
+	var hosts int
+	var oldest *device
+	for _, d := range m.byID {
+		if !d.IsHost {
+			continue
+		}
+		hosts++
+		if d.conns == 0 && (oldest == nil || d.LastSeen.Before(oldest.LastSeen)) {
+			oldest = d
+		}
+	}
+	if hosts >= maxHostDevices && oldest != nil {
+		delete(m.byID, oldest.ID)
+		delete(m.byToken, oldest.token)
+	}
 }
 
 func (m *Manager) addLocked(ip, userAgent string, isHost bool, now time.Time) (string, Device, error) {

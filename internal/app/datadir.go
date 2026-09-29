@@ -68,11 +68,18 @@ func (d *runDir) touch() error {
 	return nil
 }
 
-// remove deletes the run directory and everything in it.
-func (d *runDir) remove() {
-	if err := os.RemoveAll(d.path); err != nil {
-		d.log.Warn("could not remove data", "dir", d.path, "err", err)
+// remove deletes the run directory and everything in it. It retries briefly
+// because on Windows a file handle can take a moment to be released.
+func (d *runDir) remove() error {
+	var err error
+	for attempt := range 5 {
+		if err = os.RemoveAll(d.path); err == nil {
+			return nil
+		}
+		time.Sleep(time.Duration(attempt+1) * 100 * time.Millisecond)
 	}
+	d.log.Warn("could not remove data", "dir", d.path, "err", err)
+	return err
 }
 
 func removeStaleRuns(base string, log *slog.Logger) {

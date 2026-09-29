@@ -15,6 +15,8 @@ Consigna is built for a network you trust, such as your home Wi-Fi, and for shar
 - **Malicious files.** Downloads are always sent as attachments with `application/octet-stream`, `X-Content-Type-Options: nosniff` and a sandboxing Content Security Policy, so an uploaded HTML or SVG file cannot run inside Consigna's origin.
 - **Path tricks.** File names are cleaned and only shown; contents are stored under random IDs.
 - **Cross-site requests (CSRF).** Changes are only accepted from Consigna's own origin (`Origin` and `Sec-Fetch-Site` checks), and the cookie is `SameSite=Lax`.
+- **Websites open on the host.** The host's browser is only admitted automatically for requests from Consigna's own page (`Sec-Fetch-Site`), so another website cannot use it to create devices; devices admitted without a code are also capped.
+- **Quota tricks.** Upload sizes are checked without arithmetic that could overflow, so a huge declared length cannot slip past the tray limit.
 - **DNS rebinding.** Requests must name the server by IP address, `localhost` or an allowed host name (`--allow-host`), so a web page on another domain cannot reach Consigna through your browser.
 - **Clickjacking and injection.** A strict Content Security Policy (`default-src 'self'`, no inline scripts), `frame-ancestors 'none'`, `Referrer-Policy: no-referrer`.
 - **Filling the disk.** The tray limit counts uploads in progress, and space is reserved before any byte is written.
