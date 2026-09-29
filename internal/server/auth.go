@@ -34,7 +34,7 @@ func (s *Server) authenticate(w http.ResponseWriter, r *http.Request) (session.D
 			return d, true
 		}
 	}
-	if s.isLoopback(r) {
+	if s.isLoopback(r) && sameOriginRequest(r) {
 		token, d, err := s.sessions.JoinTrusted(clientIP(r), r.UserAgent(), true)
 		if err == nil {
 			s.setCookie(w, r, token)
@@ -43,6 +43,19 @@ func (s *Server) authenticate(w http.ResponseWriter, r *http.Request) (session.D
 		}
 	}
 	return session.Device{}, false
+}
+
+// sameOriginRequest reports whether the browser says the request comes from
+// Consigna's own page (or was typed in the address bar). Without this, any
+// website open on the host could make the host's browser mint devices with
+// cross-site requests such as <img src="http://127.0.0.1:7431/api/v1/state">.
+func sameOriginRequest(r *http.Request) bool {
+	switch r.Header.Get("Sec-Fetch-Site") {
+	case "", "same-origin", "none":
+		return true
+	default:
+		return false
+	}
 }
 
 // requireDevice rejects requests without a valid device.

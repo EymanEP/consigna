@@ -192,6 +192,28 @@ func TestRemoveAndEnd(t *testing.T) {
 	}
 }
 
+func TestHostDevicesAreCapped(t *testing.T) {
+	clk := &clock{now: time.Date(2026, 9, 20, 12, 0, 0, 0, time.UTC)}
+	m := New(Options{Now: clk.Now, MaxDevices: 256})
+	_, online, _ := m.JoinTrusted("127.0.0.1", "", true)
+	m.Connect(online.ID)
+	for range 50 {
+		clk.Advance(time.Second)
+		if _, _, err := m.JoinTrusted("127.0.0.1", "", true); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if n := len(m.Devices()); n != maxHostDevices {
+		t.Fatalf("host devices = %d, want %d", n, maxHostDevices)
+	}
+	if _, ok := m.Get(online.ID); !ok {
+		t.Fatal("an online host device was evicted")
+	}
+	if _, _, err := m.Join(m.Code(), "192.168.1.9", ""); err != nil {
+		t.Fatalf("guest could not join: %v", err)
+	}
+}
+
 func TestDevicesOrderedByJoin(t *testing.T) {
 	m, clk, _ := newManager(t)
 	_, a, _ := m.JoinTrusted("", "", false)

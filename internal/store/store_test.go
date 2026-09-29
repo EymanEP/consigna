@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"io"
+	"math"
 	"os"
 	"path/filepath"
 	"strings"
@@ -194,6 +195,41 @@ func TestQuota(t *testing.T) {
 	}
 	if _, _, err := f.s.CreateUpload(bob, "two", 100); err != nil {
 		t.Fatalf("after termination: %v", err)
+	}
+}
+
+func TestQuotaCannotBeBypassedByOverflow(t *testing.T) {
+	f := newFixture(t)
+	f.lim.set(100, time.Hour)
+	f.upload(t, alice, "a", "12345")
+	if _, _, err := f.s.CreateUpload(alice, "huge", math.MaxInt64); !errors.Is(err, ErrQuotaExceeded) {
+		t.Fatalf("MaxInt64 upload: %v", err)
+	}
+	if _, _, err := f.s.CreateUpload(alice, "huge", math.MaxInt64-4); !errors.Is(err, ErrQuotaExceeded) {
+		t.Fatalf("near-MaxInt64 upload: %v", err)
+	}
+	if u := f.s.Usage(); u.Reserved != 0 || u.Used != 5 {
+		t.Fatalf("usage = %+v", u)
+	}
+	if _, _, err := f.s.CreateUpload(alice, "fits", 95); err != nil {
+		t.Fatalf("upload that fits: %v", err)
+	}
+}
+
+func TestCloseReleasesOpenDownloads(t *testing.T) {
+	f := newFixture(t)
+	file := f.upload(t, alice, "a.txt", "contents")
+	r, _, err := f.s.Open(file.ID)
+	if err != nil {
+		t.Fatal(err)
+	}
+	f.s.Close()
+	if _, err := r.Read(make([]byte, 1)); err == nil {
+		t.Fatal("reader still open after Close")
+	}
+	_ = r.Close() // must not panic or deadlock
+	if err := os.RemoveAll(f.dir); err != nil {
+		t.Fatalf("remove after Close: %v", err)
 	}
 }
 

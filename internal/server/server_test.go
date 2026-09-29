@@ -510,6 +510,23 @@ func TestSecurityChecks(t *testing.T) {
 	}
 }
 
+func TestCrossSiteRequestsDoNotMintHostDevices(t *testing.T) {
+	e := newEnv(t, true)
+	c := e.client()
+	for range 20 {
+		resp := c.do(http.MethodGet, "/api/v1/state", nil, map[string]string{"Sec-Fetch-Site": "cross-site"})
+		if resp.StatusCode != http.StatusUnauthorized {
+			t.Fatalf("cross-site request admitted: %d", resp.StatusCode)
+		}
+	}
+	if n := len(e.sessions.Devices()); n != 0 {
+		t.Fatalf("devices = %d", n)
+	}
+	if resp := c.do(http.MethodGet, "/api/v1/state", nil, map[string]string{"Sec-Fetch-Site": "same-origin"}); resp.StatusCode != http.StatusOK {
+		t.Fatalf("host's own page refused: %d", resp.StatusCode)
+	}
+}
+
 func TestProxiedLoopbackIsNotHost(t *testing.T) {
 	e := newEnv(t, true)
 	c := e.client()
