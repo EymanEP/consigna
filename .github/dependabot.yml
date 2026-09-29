@@ -2,10 +2,12 @@ version: 2
 updates:
   - package-ecosystem: gomod
     directory: /
+    target-branch: dev
     schedule:
       interval: weekly
   - package-ecosystem: npm
     directory: /web
+    target-branch: dev
     schedule:
       interval: weekly
     groups:
@@ -13,5 +15,6 @@ updates:
         patterns: ['*']
   - package-ecosystem: github-actions
     directory: /
+    target-branch: dev
     schedule:
       interval: monthly
