@@ -1,0 +1,29 @@
+.box {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin: 12px;
+  appearance: none;
+  border: 1px solid var(--c-line-strong);
+  background: transparent;
+  cursor: pointer;
+}
+
+.box:checked {
+  border-color: var(--c-accent);
+  background: var(--c-accent);
+  box-shadow: 0 0 10px rgba(99, 232, 255, 0.5);
+}
+
+.box:checked::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--c-bg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

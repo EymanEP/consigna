@@ -1,0 +1,13 @@
+.badge {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(99, 232, 255, 0.24);
+  color: var(--c-text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-shadow: none;
+}

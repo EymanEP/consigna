@@ -1,0 +1,22 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.state {
+  flex-shrink: 0;
+  width: 64px;
+}
+
+.name {
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--c-text-soft);
+  font-size: var(--text-body);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

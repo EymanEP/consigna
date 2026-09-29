@@ -1,0 +1,116 @@
+.zone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  padding: 24px;
+  border: 1px dashed rgba(99, 232, 255, 0.34);
+  background: var(--c-panel);
+  color: var(--c-text);
+  text-align: center;
+  transition:
+    background var(--dur-med),
+    border-color var(--dur-med);
+}
+
+.hero {
+  min-height: 264px;
+}
+
+.large {
+  min-height: 330px;
+}
+
+.compact {
+  flex-direction: row;
+  gap: 10px;
+  min-height: 80px;
+  padding: 0 16px;
+  border-color: rgba(99, 232, 255, 0.26);
+  color: var(--c-text-soft);
+  font-size: var(--text-row);
+}
+
+.over {
+  border-color: var(--c-accent);
+  border-style: solid;
+  background: rgba(10, 34, 54, 0.7);
+}
+
+.preparing {
+  border-style: solid;
+  border-color: rgba(99, 232, 255, 0.5);
+  background: rgba(10, 34, 54, 0.42);
+}
+
+.trigger {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+
+.trigger:focus-visible {
+  outline-offset: -4px;
+}
+
+.glyph {
+  color: var(--c-accent);
+  animation: float 3.2s ease-in-out infinite alternate;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.over .glyph {
+  transform: scale(1.12);
+}
+
+.title {
+  font-size: var(--text-title);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.body {
+  max-width: 260px;
+  color: var(--c-text-muted);
+  font-size: var(--text-small);
+  line-height: 1.55;
+  text-shadow: none;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  pointer-events: none;
+}
+
+.compact .content {
+  flex-direction: row;
+  gap: 10px;
+}
+
+.browse {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes float {
+  from {
+    translate: 0 -2px;
+  }
+  to {
+    translate: 0 2px;
+  }
+}
+
+:global([data-fx='calm']) .glyph {
+  animation: none;
+}

@@ -1,0 +1,34 @@
+.input {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0 12px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 0;
+  background: var(--c-panel-strong);
+  color: var(--c-text);
+  font-family: var(--font-mono);
+  font-size: 16px; /* 16px stops iOS zooming on focus */
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--c-accent);
+  box-shadow: 0 0 0 1px var(--c-accent);
+}
+
+.input[aria-invalid='true'] {
+  border-color: var(--c-danger-line);
+}
+
+.select {
+  appearance: none;
+  padding-right: 32px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--c-accent) 50%),
+    linear-gradient(135deg, var(--c-accent) 50%, transparent 50%);
+  background-position:
+    calc(100% - 17px) 50%,
+    calc(100% - 12px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,35 @@
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.bar {
+  width: 12px;
+  height: 27px;
+  background: var(--c-accent);
+  box-shadow: 0 0 16px var(--c-accent);
+}
+
+.word {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  line-height: 1;
+}
+
+.small .bar {
+  width: 9px;
+  height: 20px;
+}
+
+.small .word {
+  font-size: 20px;
+  letter-spacing: 0.14em;
+}

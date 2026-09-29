@@ -1,0 +1,72 @@
+.row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 96px;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.icon {
+  color: var(--c-text-muted);
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nameText {
+  overflow: hidden;
+  font-size: var(--text-row);
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'icon name action'
+      'icon ip action'
+      'icon status action';
+    row-gap: 2px;
+    padding: 10px 0;
+  }
+
+  .icon {
+    grid-area: icon;
+    align-self: start;
+  }
+
+  .name {
+    grid-area: name;
+  }
+
+  .ip {
+    grid-area: ip;
+  }
+
+  .status {
+    grid-area: status;
+  }
+
+  .action {
+    grid-area: action;
+  }
+}

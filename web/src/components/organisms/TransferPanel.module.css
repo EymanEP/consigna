@@ -1,0 +1,9 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.queue {
+  margin-top: -3px;
+}

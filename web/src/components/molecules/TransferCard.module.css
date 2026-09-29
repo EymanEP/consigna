@@ -1,0 +1,108 @@
+.card {
+  padding: 13px 14px 14px;
+  border: 1px solid rgba(99, 232, 255, 0.28);
+  background: var(--c-panel-strong);
+}
+
+.pausedCard {
+  border-color: rgba(255, 210, 127, 0.45);
+}
+
+.failedCard {
+  border-color: var(--c-danger-line);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.arrow {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--c-accent);
+}
+
+.main {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.name {
+  overflow: hidden;
+  font-size: 14.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: block;
+  margin-top: 5px;
+}
+
+.pct {
+  flex-shrink: 0;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.pausedText {
+  color: var(--c-paused);
+}
+
+.failedText {
+  color: var(--c-danger);
+}
+
+.bar {
+  margin-top: 12px;
+}
+
+.foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.hint {
+  flex-grow: 1;
+  color: var(--c-text-soft);
+  font-size: var(--text-small);
+  line-height: 1.4;
+}
+
+.cancel {
+  margin: -12px -8px -12px 0;
+}
+
+.status {
+  margin-top: 13px;
+}
+
+.statusTitle {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.statusBody {
+  margin-top: 6px;
+  color: var(--c-text-soft);
+  font-size: var(--text-small);
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: 12px;
+}
+
+.actions > * {
+  flex: 1;
+}

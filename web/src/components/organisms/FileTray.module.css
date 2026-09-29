@@ -1,0 +1,137 @@
+.tray {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  border-bottom: 1px solid rgba(99, 232, 255, 0.18);
+  white-space: nowrap;
+}
+
+.meta {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-left: auto;
+}
+
+.sort {
+  min-height: var(--tap);
+  width: auto;
+  padding-left: 4px;
+  padding-right: 26px;
+  border: 0;
+  background-color: transparent;
+  color: var(--c-text-soft);
+  font-size: var(--text-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.chipRow {
+  display: flex;
+  margin: 10px 0 2px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 84px 112px 56px 120px;
+  gap: 12px;
+  padding: 10px 4px 8px;
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.empty {
+  padding: 24px 0 8px;
+}
+
+.emptyTitle {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.emptyBody {
+  margin-top: 8px;
+  color: var(--c-text-soft);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  text-shadow: none;
+}
+
+.selbar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+  padding: 14px var(--gutter) calc(18px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--c-accent);
+  background: #030a12;
+  color: var(--c-text);
+  text-shadow: var(--glow-text);
+  animation: rise var(--dur-med) var(--ease-out);
+}
+
+.selbarInner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.selbarGrow {
+  flex-grow: 1;
+}
+
+.count {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.packing {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.packingTitle {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.packingBody {
+  margin-top: 3px;
+  color: var(--c-text-soft);
+  font-size: 11.5px;
+}
+
+/* Room for the selection bar so the last rows stay reachable. */
+.selectingPad {
+  height: 96px;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.selectBtn {
+  padding: 0 10px;
+}

@@ -1,0 +1,23 @@
+.box {
+  padding: 12px 13px 13px;
+  border: 1px solid rgba(99, 232, 255, 0.18);
+  background: var(--c-panel-strong);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 9px;
+}
+
+.value {
+  flex-grow: 1;
+  min-width: 0;
+  color: var(--c-accent);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.4;
+  word-break: break-all;
+  user-select: all;
+}
