@@ -1,0 +1,162 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.qrRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.qrFrame {
+  position: relative;
+  flex-shrink: 0;
+  width: 248px;
+  height: 248px;
+  padding: 12px;
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-panel-strong);
+}
+
+.qr {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.qrSide {
+  display: flex;
+  flex: 1 1 260px;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.lead {
+  font-size: var(--text-lead);
+  font-weight: 600;
+}
+
+.text {
+  color: var(--c-text-soft);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  text-shadow: none;
+}
+
+.code {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.codeValue {
+  color: var(--c-accent);
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-shadow: var(--glow-text);
+}
+
+.addresses {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.address {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--tap);
+  padding: 0 12px;
+  border: 1px solid var(--c-line);
+  cursor: pointer;
+}
+
+.address:has(input:checked) {
+  border-color: var(--c-accent);
+  background: var(--c-accent-wash);
+}
+
+.address input {
+  accent-color: var(--c-accent);
+}
+
+.addressName {
+  flex-grow: 1;
+  font-size: var(--text-body);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 520px;
+}
+
+.inline {
+  display: flex;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.number {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.unit {
+  flex: 0 0 120px;
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.saved {
+  color: var(--c-accent);
+  font-size: var(--text-small);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--c-text-soft);
+  font-size: var(--text-body);
+  line-height: 1.55;
+  text-shadow: none;
+}
+
+.upload {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.uploadTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: var(--text-body);
+}

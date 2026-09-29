@@ -1,0 +1,63 @@
+.track {
+  position: relative;
+  height: 6px;
+  overflow: hidden;
+  background: var(--c-accent-wash-strong);
+}
+
+.fill {
+  height: 100%;
+  background: var(--c-accent);
+  box-shadow: 0 0 12px var(--c-accent);
+  transition: width 240ms linear;
+}
+
+.head {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  margin-left: -2px;
+  background: var(--c-text-bright);
+  transition: left 240ms linear;
+}
+
+.paused .fill {
+  background: var(--c-paused);
+  box-shadow: 0 0 12px var(--c-paused);
+  animation: breathe 0.9s ease-in-out infinite alternate;
+}
+
+.paused .head {
+  display: none;
+}
+
+.failed .fill {
+  background: var(--c-danger);
+  box-shadow: none;
+}
+
+.failed .head {
+  display: none;
+}
+
+.thin {
+  height: 3px;
+}
+
+.thin .fill {
+  box-shadow: none;
+}
+
+@keyframes breathe {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.55;
+  }
+}
+
+:global([data-fx='calm']) .paused .fill {
+  animation: none;
+}

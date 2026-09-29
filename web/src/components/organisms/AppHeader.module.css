@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 9px;
+  min-height: var(--header-h);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 18px;
+}
+
+.markBar {
+  width: 9px;
+  height: 20px;
+  background: var(--c-accent);
+  box-shadow: 0 0 14px var(--c-accent);
+}
+
+.markWord {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: var(--tap);
+  padding: 0 10px;
+  color: var(--c-text-soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.navLink:hover {
+  color: var(--c-accent);
+}
+
+.others {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

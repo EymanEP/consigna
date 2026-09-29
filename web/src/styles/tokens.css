@@ -1,0 +1,76 @@
+/*
+ * Design tokens: the CRT system from the Consigna design canvas.
+ *
+ * Ground: near-black blue with a phosphor bloom. One accent (cyan). Amber is
+ * reserved for "paused" and is never the only signal: the copy changes too.
+ * Oxanium for UI, JetBrains Mono for anything that is data.
+ */
+:root {
+  color-scheme: dark;
+
+  /* Ground */
+  --c-bg: #04070d;
+  --c-bg-deep: #010306;
+  --c-bloom: #0a1622;
+  --c-panel: rgba(8, 26, 42, 0.5);
+  --c-panel-strong: rgba(6, 20, 33, 0.78);
+  --c-overlay: rgba(4, 14, 24, 0.96);
+
+  /* Text, brightest to faintest (all at least 4.5:1 on --c-bg) */
+  --c-text: #cfeaff;
+  --c-text-bright: #eafaff;
+  --c-text-soft: #8fb6cf;
+  --c-text-muted: #6f9cbb;
+  --c-text-dim: #5c8fb0;
+  --c-text-faint: #5282a3;
+
+  /* Accent and states */
+  --c-accent: #63e8ff;
+  --c-accent-hover: #a6f2ff;
+  --c-line: rgba(99, 232, 255, 0.16);
+  --c-line-soft: rgba(99, 232, 255, 0.1);
+  --c-line-strong: rgba(99, 232, 255, 0.34);
+  --c-accent-wash: rgba(99, 232, 255, 0.08);
+  --c-accent-wash-strong: rgba(99, 232, 255, 0.14);
+  --c-paused: #ffd27f;
+  --c-paused-wash: rgba(255, 210, 127, 0.1);
+  --c-danger: #ff8fa3;
+  --c-danger-line: rgba(255, 92, 122, 0.55);
+  --c-danger-wash: rgba(255, 92, 122, 0.08);
+
+  /* Glow */
+  --glow-text: 0 0 7px rgba(94, 200, 255, 0.45);
+  --glow-accent: 0 0 12px var(--c-accent);
+
+  /* Type */
+  --font-ui: 'Oxanium', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --text-label: 10px;
+  --text-meta: 11px;
+  --text-small: 12px;
+  --text-body: 13px;
+  --text-row: 14px;
+  --text-lead: 17px;
+  --text-title: 21px;
+  --tracking-label: 0.18em;
+
+  /* Space */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --gutter: 18px;
+
+  /* Size */
+  --tap: 44px;
+  --header-h: 52px;
+  --content-max: 1280px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --dur-fast: 150ms;
+  --dur-med: 300ms;
+}

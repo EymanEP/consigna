@@ -1,0 +1,54 @@
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 34px;
+}
+
+.bar {
+  width: 5px;
+  height: 32px;
+  background: var(--c-accent);
+  transform-origin: bottom;
+  animation: bounce 0.84s ease-in-out infinite alternate;
+}
+
+.bar:nth-child(1) {
+  animation-delay: 0s;
+}
+.bar:nth-child(2) {
+  animation-delay: 0.09s;
+}
+.bar:nth-child(3) {
+  animation-delay: 0.18s;
+}
+.bar:nth-child(4) {
+  animation-delay: 0.27s;
+}
+.bar:nth-child(5) {
+  animation-delay: 0.36s;
+}
+
+.small {
+  height: 14px;
+  gap: 3px;
+}
+
+.small .bar {
+  width: 3px;
+  height: 14px;
+}
+
+@keyframes bounce {
+  from {
+    transform: scaleY(0.35);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+:global([data-fx='calm']) .bar {
+  animation: none;
+  transform: scaleY(0.6);
+}

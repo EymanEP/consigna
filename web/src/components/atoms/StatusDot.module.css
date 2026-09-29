@@ -1,0 +1,37 @@
+.dot {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  box-shadow: 0 0 10px var(--c-accent);
+}
+
+.pulse {
+  animation: pulse 2.2s ease-in-out infinite alternate;
+}
+
+.off {
+  background: transparent;
+  border: 1px solid var(--c-text-faint);
+  box-shadow: none;
+}
+
+.paused {
+  background: var(--c-paused);
+  box-shadow: 0 0 10px var(--c-paused);
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+:global([data-fx='calm']) .pulse {
+  animation: none;
+}

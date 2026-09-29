@@ -1,0 +1,53 @@
+.notice {
+  display: flex;
+  gap: var(--space-3);
+  padding: 13px 14px;
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-panel-strong);
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--c-accent);
+}
+
+.warning {
+  border-color: rgba(255, 210, 127, 0.5);
+}
+
+.warning .icon,
+.warning .title {
+  color: var(--c-paused);
+}
+
+.danger {
+  border-color: var(--c-danger-line);
+}
+
+.danger .icon,
+.danger .title {
+  color: var(--c-danger);
+}
+
+.body {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.text {
+  margin-top: 4px;
+  color: var(--c-text-soft);
+  font-size: var(--text-small);
+  line-height: 1.55;
+  text-shadow: none;
+}
+
+.action {
+  margin-top: 10px;
+}

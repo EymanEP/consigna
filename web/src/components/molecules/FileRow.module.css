@@ -1,0 +1,96 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 76px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--c-line-soft);
+  transition: background var(--dur-med);
+}
+
+.new {
+  background: linear-gradient(90deg, var(--c-accent-wash-strong), transparent 70%);
+}
+
+.selected {
+  background: var(--c-accent-wash);
+}
+
+.selectable {
+  cursor: pointer;
+}
+
+.main {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.name {
+  overflow: hidden;
+  font-size: var(--text-row);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: var(--space-1);
+  margin-top: 1px;
+}
+
+.tag {
+  margin-left: var(--space-1);
+}
+
+.del {
+  margin: -8px 0;
+}
+
+/* Desktop: the row becomes columns. */
+.wide {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 84px 112px 56px 120px;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 4px;
+}
+
+.cell {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-1);
+}
+
+@media (hover: hover) {
+  .wide:hover {
+    background: var(--c-accent-wash);
+  }
+}
+
+.getLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-accent-wash);
+  color: var(--c-accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.14em;
+  text-decoration: none;
+}
+
+.getLink:hover {
+  border-color: var(--c-accent);
+  color: var(--c-accent-hover);
+}

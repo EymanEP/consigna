@@ -1,0 +1,35 @@
+.name {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: var(--tap);
+  padding: 0 6px 0 0;
+  border: 0;
+  background: transparent;
+  color: var(--c-text);
+  font-size: var(--text-row);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-shadow: var(--glow-text);
+}
+
+.pencil {
+  color: var(--c-text-dim);
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.input {
+  width: min(200px, 48vw);
+  min-height: 36px;
+}
+
+.error {
+  color: var(--c-danger);
+  font-size: var(--text-small);
+}
