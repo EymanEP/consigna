@@ -44,7 +44,7 @@
 
 3. Scan the QR code with your phone's camera (or open the link). You are in. Open the host view on the computer to see the QR code in a browser, manage devices and change the limits.
 
-The first time, your operating system may ask whether to let Consigna accept network connections. Allow it on private networks.
+The first time, your operating system may ask whether to let Consigna accept network connections. Allow it on private networks. On Linux the firewall does not ask, it silently blocks other devices: if they cannot connect, [open the port for your network](docs/self-hosting.md#linux-firewalls).
 
 <p align="center"><img src="docs/images/host-view.png" alt="The host view with the QR code" width="720"></p>
 
