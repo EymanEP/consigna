@@ -4,6 +4,8 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-04
+
 ### Added
 
 - Go server sharing a temporary tray over the LAN: join links and codes, device tokens, rate limiting.
@@ -14,3 +16,7 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 - React web UI in the CRT style, for phones and desktops: drag and drop, paste, multi-select, new-file markers, reconnecting and ended states, calm mode.
 - File expiry (24 hours by default), a tray limit (10 GB by default), cleanup on shutdown and after crashes.
 - CI, end-to-end tests, release builds for Linux, macOS and Windows, Docker image.
+- Documentation: README, architecture, API, security model, contributor guide, and self-hosting notes including opening the port on Linux firewalls.
+
+[Unreleased]: https://github.com/EymanEP/consigna/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/EymanEP/consigna/releases/tag/v0.1.0
