@@ -205,7 +205,12 @@ func TestJoinLink(t *testing.T) {
 	// Otherwise it is the address the device itself is using.
 	req, _ := http.NewRequest(http.MethodGet, e.ts.URL+"/api/v1/state", nil)
 	req.Host = "10.1.2.3:7431"
-	resp, err := c.http.Do(req)
+	// Since Go 1.27 the jar picks cookies by req.Host, so attach the device
+	// cookie by hand and bypass the jar.
+	for _, ck := range c.http.Jar.Cookies(req.URL) {
+		req.AddCookie(ck)
+	}
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		t.Fatal(err)
 	}
